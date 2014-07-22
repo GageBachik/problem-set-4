@@ -35,3 +35,35 @@ var longestWord = function(str){
 	});
 	return sorted.shift();
 };
+
+var averageStringNumbers = function(str){
+	var chars = str.toUpperCase().split('');
+	var numStr = '';
+	var charString = '';
+	var addEmUp = [];
+	chars.map(function(aChar, index){
+		if (aChar.charCodeAt(0) > 47 && aChar.charCodeAt(0) < 58) {
+			if (index === chars.length-1) {
+				numStr += aChar;
+				addEmUp.push(numStr);
+			}else{
+				numStr += aChar;	
+			}
+		}else if(aChar.charCodeAt(0) > 57 && aChar.charCodeAt(0) < 90){
+			charString += aChar;
+			addEmUp.push(numStr);
+			numStr = '';
+		}else{
+			addEmUp.push(numStr);
+			numStr = '';
+		}
+	});
+
+	var finalValue = 0;
+	addEmUp.map(function(value){
+		if (value) {
+			finalValue += parseInt(value);
+		}
+	});
+	return Math.round(finalValue / charString.length);
+};
